@@ -5,6 +5,7 @@ use crate::error::EscrowError::InvalidInstruction;
 
 pub enum EscrowInstruction {
   InitEscrow { amount: u64 },
+  Exchange { amount: u64 },
 }
 
 impl EscrowInstruction {
@@ -13,6 +14,9 @@ impl EscrowInstruction {
 
     Ok(match tag {
       0 => Self::InitEscrow {
+        amount: Self::unpack_amount(rest)?,
+      },
+      1 => Self::Exchange {
         amount: Self::unpack_amount(rest)?,
       },
       _ => return Err(InvalidInstruction.into()),

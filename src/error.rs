@@ -5,11 +5,17 @@ use thiserror::Error;
 #[derive(Error, Debug, Copy, Clone)]
 pub enum EscrowError {
   /// Invalid instruction
-  #[error("Invalid instruction")]
+  #[error("Invalid Instruction")]
   InvalidInstruction,
-
-  #[error("Not rent exempt")]
+  /// Not Rent Exempt
+  #[error("Not Rent Exempt")]
   NotRentExempt,
+  /// Expected Amount Mismatch
+  #[error("Expected Amount Mismatch")]
+  ExpectedAmountMismatch,
+  /// Amount Overflow
+  #[error("Amount Overflow")]
+  AmountOverflow,
 }
 
 impl From<EscrowError> for ProgramError {
